@@ -1,131 +1,145 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn Money - Premium Tasks</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Earn Money - Premium Tasks</title>
 
-    <style>
-        :root {
-            --bg-dark: #0f172a;
-            --primary: #3b82f6;
-            --accent: #8b5cf6;
-            --glass: rgba(30, 41, 59, 0.6);
-            --border: rgba(255, 255, 255, 0.08);
-            --text: #f1f5f9;
-            --success: #10b981;
-        }
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        body {
-            margin: 0;
-            background-color: var(--bg-dark);
-            color: var(--text);
-            font-family: 'Hind Siliguri', sans-serif;
-            /* প্রিমিয়াম ব্যাকগ্রাউন্ড গ্রেডিয়েন্ট */
-            background-image: linear-gradient(to bottom right, #0f172a, #1e1b4b);
-            min-height: 100vh;
-        }
+  <!-- SweetAlert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        .header {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            padding: 20px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            border-bottom: 1px solid var(--border);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .header h1 {
-            margin:0; 
-            background: linear-gradient(to right, #60a5fa, #a78bfa); 
-            -webkit-background-clip: text; 
-            color: transparent;
-            font-size: 24px;
-        }
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --primary: #3b82f6;
+      --accent: #8b5cf6;
+      --glass: rgba(30, 41, 59, 0.6);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f1f5f9;
+      --success: #10b981;
+    }
 
-        .container { padding: 20px; max-width: 800px; margin: 0 auto; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Hind Siliguri', sans-serif;
+      background: linear-gradient(to bottom right, #0f172a, #1e1b4b);
+      color: var(--text);
+    }
 
-        .cat-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #a5b4fc;
-            margin: 20px 0 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .cat-title i { color: var(--primary); }
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 20px;
+      text-align: center;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
 
-        .task-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 15px;
-        }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+      background: linear-gradient(to right, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
 
-        /* টাস্ক কার্ড ডিজাইন */
-        .task-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 15px;
-            text-align: center;
-            transition: 0.3s;
-            position: relative;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100px;
-        }
-        
-        .task-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-        .task-number { font-size: 24px; font-weight: bold; color: white; margin-bottom: 5px; }
-        
-        .action-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-        
-        /* কনফার্ম বাটন স্টাইল */
-        .btn-confirm { background: var(--success); animation: pulse 1.5s infinite; }
-        .btn-done { background: #334155; color: #94a3b8; cursor: not-allowed; }
+    .cat-title {
+      margin: 25px 0 10px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #a5b4fc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 15px;
+    }
 
-        .loading-spinner { text-align: center; margin-top: 50px; color: #64748b; }
-    </style>
+    .task-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 15px;
+      text-align: center;
+      height: 110px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(6px);
+      transition: 0.3s;
+    }
+
+    .task-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+
+    .task-number {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .action-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #fff;
+      background: var(--primary);
+    }
+
+    .btn-confirm {
+      background: var(--success);
+    }
+
+    .btn-done {
+      background: #334155;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      color: #94a3b8;
+      margin-top: 50px;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="header">
-    <h1><i class="fas fa-hand-point-up" style="margin-right:8px;"></i>ডেইলি টাস্ক</h1>
-</div>
+  <div class="header">
+    <h1><i class="fas fa-hand-point-up"></i> ডেইলি টাস্ক</h1>
+  </div>
 
-<div class="container" id="appContent">
+  <div class="container" id="appContent">
     <div class="loading-spinner">টাস্ক লোড হচ্ছে...</div>
-</div>
+  </div>
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-    import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+  <!-- Firebase COMPAT SDK (402 FIX) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
-    // আপনার ফায়ারবেজ কনফিগারেশন
+  <script>
+    // Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyDL6KGFoVGdCv4quMrit7-ltNftL_5cF2Q",
       authDomain: "micrujob.firebaseapp.com",
@@ -136,130 +150,82 @@
       appId: "1:756689856362:web:bb9086d1f73d839be7e713"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    
-    // সুইট অ্যালার্ট কনফিগারেশন
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
     const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        background: 'rgba(30, 41, 59, 0.9)',
-        color: '#fff',
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true
     });
 
-    // ১. টাস্ক লোড করা
-    onValue(ref(db, 'tasks'), (snapshot) => {
-        const contentDiv = document.getElementById('appContent');
-        const data = snapshot.val();
-        contentDiv.innerHTML = '';
+    db.ref('tasks').on('value', snapshot => {
+      const content = document.getElementById('appContent');
+      const data = snapshot.val();
+      content.innerHTML = '';
 
-        if (!data) {
-            contentDiv.innerHTML = '<div class="loading-spinner">বর্তমানে কোনো কাজ নেই।</div>';
-            return;
-        }
+      if (!data) {
+        content.innerHTML = '<div class="loading-spinner">কোনো টাস্ক নেই</div>';
+        return;
+      }
 
-        Object.keys(data).forEach(category => {
-            const tasks = data[category];
-            if(!tasks) return;
+      Object.keys(data).forEach(category => {
+        const title = document.createElement('div');
+        title.className = 'cat-title';
+        title.innerHTML = `<i class="fas fa-gem"></i> ${category}`;
+        content.appendChild(title);
 
-            // ক্যাটাগরি টাইটেল
-            const catHeader = document.createElement('div');
-            catHeader.className = 'cat-title';
-            catHeader.innerHTML = `<i class="fas fa-gem"></i> ${category}`;
-            contentDiv.appendChild(catHeader);
+        const grid = document.createElement('div');
+        grid.className = 'task-grid';
 
-            // টাস্ক গ্রিড
-            const grid = document.createElement('div');
-            grid.className = 'task-grid';
+        let count = 1;
+        Object.entries(data[category]).forEach(([id, task]) => {
+          const done = localStorage.getItem('task-' + id) === 'done';
 
-            let count = 1;
-            Object.entries(tasks).forEach(([taskId, task]) => {
-                const card = document.createElement('div');
-                card.className = 'task-card';
-                
-                // বাটন স্টেট লোকালি সেভ করা (যাতে পেজ রিফ্রেশ না হওয়া পর্যন্ত কাজ না করে)
-                // বাস্তব অ্যাপে, এটি ইউজার আইডির সাথে সার্ভারে সেভ করতে হবে।
-                const isCompleted = localStorage.getItem(`task-${taskId}`) === 'completed';
-                
-                let buttonHTML = '';
-                if (isCompleted) {
-                    buttonHTML = `<button id="btn-${taskId}" class="action-btn btn-done" disabled>Completed</button>`;
-                } else {
-                    buttonHTML = `<button id="btn-${taskId}" class="action-btn" onclick="handleTask('${category}', '${taskId}', '${task.link}')">Start Task</button>`;
-                }
-
-                // কার্ডের ভেতরের HTML
-                card.innerHTML = `
-                    <div class="task-number">Task ${count}</div>
-                    ${buttonHTML}
-                `;
-                grid.appendChild(card);
-                count++;
-            });
-            contentDiv.appendChild(grid);
+          const card = document.createElement('div');
+          card.className = 'task-card';
+          card.innerHTML = `
+            <div class="task-number">Task ${count}</div>
+            <button
+              id="btn-${id}"
+              class="action-btn ${done ? 'btn-done' : ''}"
+              ${done ? 'disabled' : ''}
+              onclick="handleTask('${category}','${id}','${task.link}')">
+              ${done ? 'Completed' : 'Start Task'}
+            </button>
+          `;
+          grid.appendChild(card);
+          count++;
         });
+
+        content.appendChild(grid);
+      });
     });
 
-    // ২. টাস্ক হ্যান্ডলিং লজিক (Start -> Confirm -> Done)
-    window.handleTask = function(cat, id, link) {
-        const btn = document.getElementById(`btn-${id}`);
-        
-        // ধাপ ১: প্রথমবার ক্লিক (Start Task)
-        if(btn.innerText === 'Start Task') {
-            
-            // লিংক ওপেন করা
-            window.open(link, '_blank', 'noopener,noreferrer');
-            
-            // বাটন পরিবর্তন করা
-            btn.innerText = 'Confirm Task';
-            btn.className = 'action-btn btn-confirm';
-            
-            Toast.fire({
-                icon: 'info',
-                title: 'কাজ শেষ করে Confirm করুন',
-            });
-        } 
-        // ধাপ ২: দ্বিতীয়বার ক্লিক (Confirm Task)
-        else if (btn.innerText === 'Confirm Task') {
-            
-            // বাটনকে লোডিং মোডে নিয়ে যাওয়া
-            btn.innerText = 'Submitting...';
+    function handleTask(cat, id, link) {
+      const btn = document.getElementById('btn-' + id);
+
+      if (btn.innerText === 'Start Task') {
+        window.open(link, '_blank', 'noopener,noreferrer');
+        btn.innerText = 'Confirm Task';
+        btn.classList.add('btn-confirm');
+        Toast.fire({ icon: 'info', title: 'কাজ শেষ করে Confirm করুন' });
+      } 
+      else if (btn.innerText === 'Confirm Task') {
+        btn.innerText = 'Submitting...';
+        btn.disabled = true;
+
+        db.ref(`tasks/${cat}/${id}/clicks`).transaction(c => (c || 0) + 1)
+          .then(() => {
+            btn.innerText = 'Completed';
             btn.className = 'action-btn btn-done';
-            btn.disabled = true;
-
-            // ডাটাবেসে ক্লিক কাউন্ট বাড়ানো (Transaction)
-            const taskRef = ref(db, `tasks/${cat}/${id}/clicks`);
-            
-            runTransaction(taskRef, (currentClicks) => {
-                return (currentClicks || 0) + 1;
-            }).then(() => {
-                
-                // সফল হলে বাটন অফ করে দেওয়া
-                btn.innerText = 'Completed';
-                localStorage.setItem(`task-${id}`, 'completed'); // লোকাল স্টোরেজে সেভ
-
-                Swal.fire({
-                    icon: 'success',
-                    title: 'সফল!',
-                    text: 'আপনার কাজটি জমা হয়েছে।',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                
-            }).catch(err => {
-                // এরর হলে বাটন ফিরিয়ে আনা
-                btn.innerText = 'Confirm Task';
-                btn.className = 'action-btn btn-confirm';
-                btn.disabled = false;
-                
-                Swal.fire('Error', 'নেটওয়ার্ক বা ডাটাবেস সমস্যা। আবার চেষ্টা করুন।', 'error');
-            });
-        }
+            localStorage.setItem('task-' + id, 'done');
+          });
+      }
     }
-</script>
+  </script>
 
 </body>
 </html>
